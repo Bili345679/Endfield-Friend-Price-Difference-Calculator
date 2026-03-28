@@ -154,6 +154,9 @@
                 </tr>
             </tbody>
         </table>
+        <div style="margin-top: 20px; margin-bottom: 10px;">
+        <button @click="resetData" style="color: red; border-color: red;">重置</button>
+        </div>
     </div>
 
     <script>
@@ -254,6 +257,16 @@
                         }
                     });
                     return { friend: maxFriend || '-', diff: maxDiff === -Infinity ? 0 : maxDiff };
+                },
+                resetData(){
+                    if(confirm('确定要清空所有商品和好友数据吗？此操作不可逆。')){
+                        this.products = [];
+                        this.friends = [];
+                        this.newProduct = { name: '', basePrice: 2000, discount: 0 };
+                        this.newFriend = { name: '', discounts: {} };
+                        this.saveFriends();
+                        this.saveProducts();
+                    }
                 }
             }
         }).mount('#app');
